@@ -3,314 +3,99 @@
     <nav class="sidebar-nav">
         <nav class="sidebar-nav">
             <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">
-                        <i class="nav-icon icon-speedometer"></i> Dashboard
-                        <span class="badge badge-primary">NEW</span>
-                    </a>
-                </li>
-                <li class="nav-title">Theme</li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/colors') }}">
-                        <i class="nav-icon icon-drop"></i> Colors</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/typography') }}">
-                        <i class="nav-icon icon-pencil"></i> Typography</a
-                    >
-                </li>
-                <li class="nav-title">Components</li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-puzzle"></i> Base</a
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            class="h-1 w-1"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+                            />
+                        </svg>
+
+                        Artists</a
                     >
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/breadcrumb') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i>
-                                Breadcrumb</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/base/cards') }}">
-                                <i class="nav-icon icon-puzzle"></i> Cards</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/carousel') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Carousel</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/collapse') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Collapse</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/base/forms') }}">
-                                <i class="nav-icon icon-puzzle"></i> Forms</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/jumbotron') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i>
-                                Jumbotron</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/list-group') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> List
-                                group</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/base/navs') }}">
-                                <i class="nav-icon icon-puzzle"></i> Navs</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/pagination') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i>
-                                Pagination</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/popovers') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Popovers</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/progress') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Progress</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/scrollspy') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i>
-                                Scrollspy</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/switches') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Switches</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/tables') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Tables</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/base/tabs') }}">
-                                <i class="nav-icon icon-puzzle"></i> Tabs</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/base/tooltips') }}"
-                            >
-                                <i class="nav-icon icon-puzzle"></i> Tooltips</a
+                            <a class="nav-link" href="{{ url('/artists') }}">
+                                Artists</a
                             >
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-cursor"></i> Buttons</a
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            class="h-1 w-1"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"
+                            /></svg
+                        >Albums</a
                     >
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('buttons/') }}">
-                                <i class="nav-icon icon-cursor"></i> Buttons</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('buttons/button-group') }}"
-                            >
-                                <i class="nav-icon icon-cursor"></i> Buttons
-                                Group</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('buttons/dropdowns') }}"
-                            >
-                                <i class="nav-icon icon-cursor"></i>
-                                Dropdowns</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('buttons/brand-buttons') }}"
-                            >
-                                <i class="nav-icon icon-cursor"></i> Brand
-                                Buttons</a
-                            >
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/charts') }}">
-                        <i class="nav-icon icon-pie-chart"></i> Charts</a
-                    >
-                </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-star"></i> Icons</a
-                    >
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('icons/coreui-icons') }}"
-                            >
-                                <i class="nav-icon icon-star"></i> CoreUI Icons
-                                <span class="badge badge-success">NEW</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('icons/flags') }}">
-                                <i class="nav-icon icon-star"></i> Flags</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('icons/font-awesome') }}"
-                            >
-                                <i class="nav-icon icon-star"></i> Font Awesome
-                                <span class="badge badge-secondary">4.7</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('icons/simple-line-icons') }}"
-                            >
-                                <i class="nav-icon icon-star"></i> Simple Line
-                                Icons</a
+                            <a class="nav-link" href="{{ url('/albums') }}">
+                                Albums</a
                             >
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-bell"></i> Notifications</a
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            class="h-1 w-1"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
+                            /></svg
+                        >Playlists</a
                     >
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('notifications/alerts') }}"
-                            >
-                                <i class="nav-icon icon-bell"></i> Alerts</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('notifications/badge') }}"
-                            >
-                                <i class="nav-icon icon-bell"></i> Badge</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('notifications/modals') }}"
-                            >
-                                <i class="nav-icon icon-bell"></i> Modals</a
+                            <a class="nav-link" href="{{ url('/playlists') }}">
+                                Playlists</a
                             >
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('widgets') }}">
-                        <i class="nav-icon icon-calculator"></i> Widgets
-                        <span class="badge badge-primary">NEW</span>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li class="nav-title">Extras</li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-star"></i> Pages</a
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            class="h-1 w-1"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"
+                            /></svg
+                        >Tracks</a
                     >
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="/404" target="_top">
-                                <i class="nav-icon icon-star"></i> Error 404</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url('/500') }}"
-                                target="_top"
-                            >
-                                <i class="nav-icon icon-star"></i> Error 500</a
+                            <a class="nav-link" href="{{ url('/tracks') }}">
+                                Tracks</a
                             >
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item mt-auto">
-                    <a
-                        class="nav-link nav-link-success"
-                        href="https://coreui.io"
-                        target="_top"
-                    >
-                        <i class="nav-icon icon-cloud-download"></i> Download
-                        CoreUI</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a
-                        class="nav-link nav-link-danger"
-                        href="https://coreui.io/pro/"
-                        target="_top"
-                    >
-                        <i class="nav-icon icon-layers"></i> Try CoreUI
-                        <strong>PRO</strong>
-                    </a>
                 </li>
             </ul>
         </nav>
