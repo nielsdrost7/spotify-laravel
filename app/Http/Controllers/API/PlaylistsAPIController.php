@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\Playlist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class PlaylistsAPIController extends AppBaseController
 {
     public function index(Request $request): JsonResponse
     {
-        $query = PlayList::query();
+        $query = Playlist::query();
 
         if ($request->get('skip')) {
             $query->skip($request->get('skip'));

@@ -21,7 +21,8 @@
         "guzzlehttp/guzzle": "^7.0",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.54",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "yajra/laravel-datatables-oracle": "^9.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
