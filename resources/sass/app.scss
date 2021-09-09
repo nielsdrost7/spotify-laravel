@@ -1,0 +1,16 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Variables
+@import 'variables';
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import "~@coreui/coreui/scss/coreui";
+
+@import '~@coreui/icons/scss/coreui-icons';
+@import '~font-awesome/css/font-awesome.min';
+
+.app {
+    min-height: 100vh;
+    display: flex;
+}

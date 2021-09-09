@@ -1,0 +1,39 @@
+# IDE
+/.idea
+/.vscode
+/.vagrant
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+# app
+/storage/*.key
+/vendor
+
+# assets
+/node_modules
+/public_html/storage
+/public_html/hot
+/public_html/js
+/public_html/css
+/public_html/images
+/public_html/webfonts
+/public_html/mix-manifest.json
+/public_html/mix.js.map
+
+# logs
+npm-debug.log
+
+# environment
+.env
+.env.backup
+.env.testing
+.env.dusk.local
+
+# cache
+.php-cs-fixer.cache
+.phpunit.result.cache
+
+# testing
+/public_html/tests-report
+phpunit\.dusk\.xml

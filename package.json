@@ -1,0 +1,27 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "@coreui/coreui": "^2.1.16",
+        "@coreui/icons": "^0.3",
+        "axios": "^0.21",
+        "bootstrap": "^4.3",
+        "core-js": "^2.6",
+        "cross-env": "^5.2",
+        "font-awesome": "^4.7",
+        "jquery": "^3.6",
+        "laravel-mix": "^6.0",
+        "lodash": "^4.17",
+        "pace-progress": "1.0",
+        "perfect-scrollbar": "^1.4",
+        "popper.js": "^1.16",
+        "resolve-url-loader": "^4.0",
+        "sass": "^1.39",
+        "sass-loader": "^7.3"
+    }
+}
