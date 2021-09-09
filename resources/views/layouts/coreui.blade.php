@@ -10,20 +10,20 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Spotify-Laravel</title>
-                {{--
-                <script
-                src="https://code.jquery.com/jquery-3.1.1.min.js"
-                --}}
-                {{--crossorigin="anonymous"
-                ></script>
-                --}}
+        {{--
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            --}}
+            {{--crossorigin="anonymous"
+        ></script>
+        --}}
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
         <link
             href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
             rel="stylesheet"
         />
-		@stack('styles')
+        @stack('styles')
     </head>
     <body
         class="
@@ -38,9 +38,7 @@
         @include('partials.header')
         <div class="app-body">
             @include('partials.sidebar')
-            <main class="main">
-                @yield('content')
-            </main>
+            <main class="main">@yield('content')</main>
         </div>
         @include('partials.footer')
 
@@ -52,63 +50,56 @@
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-		<script>
-			$(function() {
+        <script>
+            $(function () {
+                let languages = {
+                    en: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json",
+                };
 
-              let languages = {
-                'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
-              };
-
-              $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn-md' })
-              $.extend(true, $.fn.dataTable.defaults, {
-                responsive: true,
-                language: {
-                  url: languages['{{ app()->getLocale() }}']
-                },
-                columnDefs: [{
-                    orderable: false,
-                    className: 'select-checkbox',
-                    targets: 0
-                }, {
-                    orderable: false,
-                    searchable: false,
-                    targets: -1
-                }],
-                select: {
-                  style:    'multi+shift',
-                  selector: 'td:first-child'
-                },
-                order: [],
-                scrollX: true,
-                pageLength: 100,
-                dom: 'lBfrtip<"actions">',
-                buttons: [
-                  {
-                    extend: 'selectAll',
-                    className: 'btn-indigo',
-                    text: selectAllButtonTrans,
-                    exportOptions: {
-                      columns: ':visible'
+                $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+                    className: "btn-md",
+                });
+                $.extend(true, $.fn.dataTable.defaults, {
+                    responsive: true,
+                    language: {
+                        url: languages["{{ app()->getLocale() }}"],
                     },
-                    action: function(e, dt) {
-                      e.preventDefault()
-                      dt.rows().deselect();
-                      dt.rows({ search: 'applied' }).select();
-                    }
-                  },
-                  {
-                    extend: 'selectNone',
-                    className: 'btn-indigo',
-                    text: selectNoneButtonTrans,
-                    exportOptions: {
-                      columns: ':visible'
-                    }
-                  },
-                ]
-              });
+                    columnDefs: [],
+                    select: {
+                        style: "multi+shift",
+                        selector: "td:first-child",
+                    },
+                    order: [],
+                    scrollX: true,
+                    pageLength: 100,
+                    dom: 'lrtip<"actions">',
+                    buttons: [
+                        {
+                            extend: "selectAll",
+                            className: "btn-indigo",
+                            text: 'Select All',
+                            exportOptions: {
+                                columns: ":visible",
+                            },
+                            action: function (e, dt) {
+                                e.preventDefault();
+                                dt.rows().deselect();
+                                dt.rows({ search: "applied" }).select();
+                            },
+                        },
+                        {
+                            extend: "selectNone",
+                            className: "btn-indigo",
+                            text: 'Select None',
+                            exportOptions: {
+                                columns: ":visible",
+                            },
+                        },
+                    ],
+                });
             });
         </script>
-		
-		@stack('scripts')
+
+        @stack('scripts')
     </body>
 </html>

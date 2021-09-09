@@ -1,4 +1,5 @@
-@extends('layouts.coreui') @push('stylesheets')
+@extends('layouts.coreui')
+@push('stylesheets')
 <link
     type="text/css"
     href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css"
@@ -10,10 +11,9 @@
     rel="stylesheet"
 />
 
-@endpush
-@section('content')
+@endpush @section('content')
 <div class="container-fluid">
-    <div class="animated fadeIn">
+
         @include('flash::message')
         <div class="row">
             <div class="col-lg-12">
@@ -34,7 +34,6 @@
                         >
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Name</th>
                                     <th>PlayCount</th>
                                     <th>Website</th>
@@ -48,10 +47,8 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
-@endsection
-@push('scripts')
+@endsection @push('scripts')
 <script
     type="text/javascript"
     src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"
@@ -62,9 +59,6 @@
 ></script>
 
 <script>
-
-
-
     $(function () {
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
         let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
@@ -72,43 +66,7 @@
            processing: true,
            serverSide: true,
            ajax: "{{ route('albums.dataTable') }}",
-            buttons: [
-                {
-                text: 'Export to PDF',
-                className: 'export-to-pdf',
-                action: function ( e, dt, button, config ) {
-
-
-                    var ids = table.rows({ selected: true }).data().pluck('id');
-                    console.log(ids)
-
-
-
-                    $.ajax({
-                        url: "{{ route('albums.multiDelete') }}",
-                        type: 'post',
-                        data: {ids:ids},
-                        dataType: 'json',
-                        success: function(returnedData) {
-                            console.log(returnedData);
-                        }
-                    });
-                }
-                }
-            ],
-           columnDefs: [
-               {
-                   targets: 0,
-                   checkboxes: {
-                       selectRow: true
-                   }
-               }
-           ],
-            select: {
-            style:'multi',
-            },
            columns: [
-               { data: "checkbox", orderable:false, searchable:false},
                { data: "name", name: "name" },
                { data: "playcount", name: "playcount" },
                { data: "uri", name: "uri" },

@@ -15,12 +15,6 @@ class AlbumsAPIController extends AppBaseController
         $albums = Album::select('id', 'name', 'playcount', 'uri')->orderBy('name');
 
         return DataTables::of($albums)
-            // ->setRowId('id')
-            // ->setRowAttr([
-            //     'color' => function ($user) {
-            //         return $user->color;
-            //     },
-            // ])
             ->addColumn('checkbox', function ($album) {
                 return '<input type="checkbox" name="pdr_checkbox[]" class="pdr_checkbox" value="' . $album->id . '" />';
             })
