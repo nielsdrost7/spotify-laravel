@@ -1,64 +1,27 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AlbumsController;
+use App\Http\Controllers\Admin\ArtistsController;
+use App\Http\Controllers\Admin\PlaylistsController;
+use App\Http\Controllers\Admin\TracksController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\HomeController;
 
-Auth::routes();
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function (): void {
+    Route::get('/', [AdminController::class, 'index'])->name('adminhome');
 
-Route::get('/', 'DashboardController@index')->name('home');
-Route::get('/colors', 'DashboardController@colors')->name('colors');
-Route::get('/typography', 'DashboardController@typography')->name('typography');
-Route::get('/charts', 'DashboardController@charts')->name('charts');
-Route::get('/widgets', 'DashboardController@widgets')->name('widgets');
+    Route::get('albums', [AlbumsController::class, 'index'])->name('albums.index');
+    Route::get('artists', [ArtistsController::class, 'index'])->name('artists.index');
+    Route::get('playlists', [PlaylistsController::class, 'index'])->name('playlists.index');
+    Route::get('tracks', [TracksController::class, 'index'])->name('tracks.index');
 
-Route::prefix('/base')->group(function (): void {
-    Route::get('/', 'DashboardController@breadcrumb');
-    Route::get('/breadcrumb', 'DashboardController@breadcrumb');
-    Route::get('/cards', 'DashboardController@cards');
-    Route::get('/carousel', 'DashboardController@carousel');
-    Route::get('/collapse', 'DashboardController@collapse');
-    Route::get('/forms', 'DashboardController@forms');
-    Route::get('/jumbotron', 'DashboardController@jumbotron');
-    Route::get('/list-group', 'DashboardController@listGroup');
-    Route::get('/navs', 'DashboardController@navs');
-    Route::get('/pagination', 'DashboardController@pagination');
-    Route::get('/popovers', 'DashboardController@popovers');
-    Route::get('/progress', 'DashboardController@progress');
-    Route::get('/scrollspy', 'DashboardController@scrollspy');
-    Route::get('/switches', 'DashboardController@switches');
-    Route::get('/tables', 'DashboardController@tables');
-    Route::get('/tabs', 'DashboardController@tabs');
-    Route::get('/tooltips', 'DashboardController@tooltips');
+    Route::resource('albums', AlbumsController::class);
+    Route::resource('artists', ArtistsController::class);
+    // Users
+    Route::delete('users/destroy', [UsersController::class, 'massDestroy'])->name('users.massDestroy');
+    Route::resource('users', AlbumsController::class);
 });
-
-Route::prefix('/buttons')->group(function (): void {
-    Route::get('/', 'DashboardController@buttons');
-    Route::get('/button-group', 'DashboardController@buttonGroup');
-    Route::get('/dropdowns', 'DashboardController@dropdowns');
-    Route::get('/brand-buttons', 'DashboardController@brandButtons');
-});
-
-Route::prefix('/icons')->group(function (): void {
-    Route::get('/', 'DashboardController@coreuiIcons');
-    Route::get('/coreui-icons', 'DashboardController@coreuiIcons');
-    Route::get('/flags', 'DashboardController@flags');
-    Route::get('/font-awesome', 'DashboardController@fontAwesome');
-    Route::get('/simple-line-icons', 'DashboardController@simpleLineIcons');
-});
-
-Route::prefix('/notifications')->group(function (): void {
-    Route::get('/', 'DashboardController@alerts');
-    Route::get('/alerts', 'DashboardController@alerts');
-    Route::get('/badge', 'DashboardController@badge');
-    Route::get('/modals', 'DashboardController@modals');
-});
-
-Route::get('/500', 'DashboardController@error');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('homeHome');
+Auth::routes(['register' => false]);

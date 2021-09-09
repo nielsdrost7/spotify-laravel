@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <base href="./" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
         />
-        <meta name="description" content="Agribizcenter" />
-
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-
-        <title>CoreUI-Laravel</title>
-        {{--
-        <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            --}}
-            {{--crossorigin="anonymous"
-        ></script>
-        --}}
+        <title>Spotify-Laravel</title>
+                {{--
+                <script
+                src="https://code.jquery.com/jquery-3.1.1.min.js"
+                --}}
+                {{--crossorigin="anonymous"
+                ></script>
+                --}}
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+        @stack('styles')
     </head>
     <body
         class="
@@ -37,13 +34,14 @@
         @include('partials.header')
         <div class="app-body">
             @include('partials.sidebar')
-            <main class="main">@yield('content')</main>
+            <main class="main">
+                @yield('content')
+            </main>
         </div>
         @include('partials.footer')
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
-
-        @yield('scripts')
+        @stack('scripts')
     </body>
 </html>
