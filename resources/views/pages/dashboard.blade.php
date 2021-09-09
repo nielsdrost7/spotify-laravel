@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.app') @section('content')
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="row">
@@ -1341,5 +1340,4 @@
         <!-- /.row-->
     </div>
 </div>
-@endsection @section('scripts')
-@endsection
+@endsection @section('scripts') @endsection

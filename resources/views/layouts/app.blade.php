@@ -25,7 +25,14 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     </head>
     <body
-        class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show footer-fixed"
+        class="
+            app
+            header-fixed
+            sidebar-fixed
+            aside-menu-fixed
+            sidebar-lg-show
+            footer-fixed
+        "
     >
         @include('common.header')
         <div class="app-body">

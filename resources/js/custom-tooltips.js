@@ -6,138 +6,151 @@
  */
 
 function CustomTooltips(tooltipModel) {
-  // Add unique id if not exist
-  const _setCanvasId = () => {
-    const _idMaker = () => {
-      const _hex = 16
-      const _multiplier = 0x10000
-      return ((1 + Math.random()) * _multiplier | 0).toString(_hex)
+    // Add unique id if not exist
+    const _setCanvasId = () => {
+        const _idMaker = () => {
+            const _hex = 16;
+            const _multiplier = 0x10000;
+            return (((1 + Math.random()) * _multiplier) | 0).toString(_hex);
+        };
+        const _canvasId = `_canvas-${_idMaker() + _idMaker()}`;
+        this._chart.canvas.id = _canvasId;
+        return _canvasId;
+    };
+
+    const ClassName = {
+        ABOVE: "above",
+        BELOW: "below",
+        CHARTJS_TOOLTIP: "chartjs-tooltip",
+        NO_TRANSFORM: "no-transform",
+        TOOLTIP_BODY: "tooltip-body",
+        TOOLTIP_BODY_ITEM: "tooltip-body-item",
+        TOOLTIP_BODY_ITEM_COLOR: "tooltip-body-item-color",
+        TOOLTIP_BODY_ITEM_LABEL: "tooltip-body-item-label",
+        TOOLTIP_BODY_ITEM_VALUE: "tooltip-body-item-value",
+        TOOLTIP_HEADER: "tooltip-header",
+        TOOLTIP_HEADER_ITEM: "tooltip-header-item",
+    };
+
+    const Selector = {
+        DIV: "div",
+        SPAN: "span",
+        TOOLTIP: `${this._chart.canvas.id || _setCanvasId()}-tooltip`,
+    };
+
+    let tooltip = document.getElementById(Selector.TOOLTIP);
+
+    if (!tooltip) {
+        tooltip = document.createElement("div");
+        tooltip.id = Selector.TOOLTIP;
+        tooltip.className = ClassName.CHARTJS_TOOLTIP;
+        this._chart.canvas.parentNode.appendChild(tooltip);
     }
-    const _canvasId = `_canvas-${_idMaker() + _idMaker()}`
-    this._chart.canvas.id = _canvasId
-    return _canvasId
-  }
 
-  const ClassName = {
-    ABOVE                   : 'above',
-    BELOW                   : 'below',
-    CHARTJS_TOOLTIP         : 'chartjs-tooltip',
-    NO_TRANSFORM            : 'no-transform',
-    TOOLTIP_BODY            : 'tooltip-body',
-    TOOLTIP_BODY_ITEM       : 'tooltip-body-item',
-    TOOLTIP_BODY_ITEM_COLOR : 'tooltip-body-item-color',
-    TOOLTIP_BODY_ITEM_LABEL : 'tooltip-body-item-label',
-    TOOLTIP_BODY_ITEM_VALUE : 'tooltip-body-item-value',
-    TOOLTIP_HEADER          : 'tooltip-header',
-    TOOLTIP_HEADER_ITEM     : 'tooltip-header-item'
-  }
+    // Hide if no tooltip
+    if (tooltipModel.opacity === 0) {
+        tooltip.style.opacity = 0;
+        return;
+    }
 
-  const Selector = {
-    DIV     : 'div',
-    SPAN    : 'span',
-    TOOLTIP : `${this._chart.canvas.id || _setCanvasId()}-tooltip`
-  }
+    // Set caret Position
+    tooltip.classList.remove(
+        ClassName.ABOVE,
+        ClassName.BELOW,
+        ClassName.NO_TRANSFORM
+    );
+    if (tooltipModel.yAlign) {
+        tooltip.classList.add(tooltipModel.yAlign);
+    } else {
+        tooltip.classList.add(ClassName.NO_TRANSFORM);
+    }
 
-  let tooltip = document.getElementById(Selector.TOOLTIP)
+    // Set Text
+    if (tooltipModel.body) {
+        const titleLines = tooltipModel.title || [];
 
-  if (!tooltip) {
-    tooltip = document.createElement('div')
-    tooltip.id = Selector.TOOLTIP
-    tooltip.className = ClassName.CHARTJS_TOOLTIP
-    this._chart.canvas.parentNode.appendChild(tooltip)
-  }
+        const tooltipHeader = document.createElement(Selector.DIV);
+        tooltipHeader.className = ClassName.TOOLTIP_HEADER;
 
-  // Hide if no tooltip
-  if (tooltipModel.opacity === 0) {
-    tooltip.style.opacity = 0
-    return
-  }
+        titleLines.forEach((title) => {
+            const tooltipHeaderTitle = document.createElement(Selector.DIV);
+            tooltipHeaderTitle.className = ClassName.TOOLTIP_HEADER_ITEM;
+            tooltipHeaderTitle.innerHTML = title;
+            tooltipHeader.appendChild(tooltipHeaderTitle);
+        });
 
-  // Set caret Position
-  tooltip.classList.remove(ClassName.ABOVE, ClassName.BELOW, ClassName.NO_TRANSFORM)
-  if (tooltipModel.yAlign) {
-    tooltip.classList.add(tooltipModel.yAlign)
-  } else {
-    tooltip.classList.add(ClassName.NO_TRANSFORM)
-  }
+        const tooltipBody = document.createElement(Selector.DIV);
+        tooltipBody.className = ClassName.TOOLTIP_BODY;
 
-  // Set Text
-  if (tooltipModel.body) {
-    const titleLines = tooltipModel.title || []
+        const tooltipBodyItems = tooltipModel.body.map((item) => item.lines);
+        tooltipBodyItems.forEach((item, i) => {
+            const tooltipBodyItem = document.createElement(Selector.DIV);
+            tooltipBodyItem.className = ClassName.TOOLTIP_BODY_ITEM;
 
-    const tooltipHeader = document.createElement(Selector.DIV)
-    tooltipHeader.className = ClassName.TOOLTIP_HEADER
+            const colors = tooltipModel.labelColors[i];
 
-    titleLines.forEach((title) => {
-      const tooltipHeaderTitle = document.createElement(Selector.DIV)
-      tooltipHeaderTitle.className = ClassName.TOOLTIP_HEADER_ITEM
-      tooltipHeaderTitle.innerHTML = title
-      tooltipHeader.appendChild(tooltipHeaderTitle)
-    })
+            const tooltipBodyItemColor = document.createElement(Selector.SPAN);
+            tooltipBodyItemColor.className = ClassName.TOOLTIP_BODY_ITEM_COLOR;
+            tooltipBodyItemColor.style.backgroundColor = colors.backgroundColor;
 
-    const tooltipBody = document.createElement(Selector.DIV)
-    tooltipBody.className = ClassName.TOOLTIP_BODY
+            tooltipBodyItem.appendChild(tooltipBodyItemColor);
 
-    const tooltipBodyItems = tooltipModel.body.map((item) => item.lines)
-    tooltipBodyItems.forEach((item, i) => {
-      const tooltipBodyItem = document.createElement(Selector.DIV)
-      tooltipBodyItem.className = ClassName.TOOLTIP_BODY_ITEM
+            if (item[0].split(":").length > 1) {
+                const tooltipBodyItemLabel = document.createElement(
+                    Selector.SPAN
+                );
+                tooltipBodyItemLabel.className =
+                    ClassName.TOOLTIP_BODY_ITEM_LABEL;
+                tooltipBodyItemLabel.innerHTML = item[0].split(": ")[0];
 
-      const colors = tooltipModel.labelColors[i]
+                tooltipBodyItem.appendChild(tooltipBodyItemLabel);
 
-      const tooltipBodyItemColor = document.createElement(Selector.SPAN)
-      tooltipBodyItemColor.className = ClassName.TOOLTIP_BODY_ITEM_COLOR
-      tooltipBodyItemColor.style.backgroundColor = colors.backgroundColor
+                const tooltipBodyItemValue = document.createElement(
+                    Selector.SPAN
+                );
+                tooltipBodyItemValue.className =
+                    ClassName.TOOLTIP_BODY_ITEM_VALUE;
+                tooltipBodyItemValue.innerHTML = item[0].split(": ").pop();
 
-      tooltipBodyItem.appendChild(tooltipBodyItemColor)
+                tooltipBodyItem.appendChild(tooltipBodyItemValue);
+            } else {
+                const tooltipBodyItemValue = document.createElement(
+                    Selector.SPAN
+                );
+                tooltipBodyItemValue.className =
+                    ClassName.TOOLTIP_BODY_ITEM_VALUE;
+                tooltipBodyItemValue.innerHTML = item[0];
 
-      if (item[0].split(':').length > 1) {
-        const tooltipBodyItemLabel = document.createElement(Selector.SPAN)
-        tooltipBodyItemLabel.className = ClassName.TOOLTIP_BODY_ITEM_LABEL
-        tooltipBodyItemLabel.innerHTML = item[0].split(': ')[0]
+                tooltipBodyItem.appendChild(tooltipBodyItemValue);
+            }
 
-        tooltipBodyItem.appendChild(tooltipBodyItemLabel)
+            tooltipBody.appendChild(tooltipBodyItem);
+        });
 
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
-        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
-        tooltipBodyItemValue.innerHTML = item[0].split(': ').pop()
+        tooltip.innerHTML = "";
 
-        tooltipBodyItem.appendChild(tooltipBodyItemValue)
-      } else {
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
-        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
-        tooltipBodyItemValue.innerHTML = item[0]
+        tooltip.appendChild(tooltipHeader);
+        tooltip.appendChild(tooltipBody);
+    }
 
-        tooltipBodyItem.appendChild(tooltipBodyItemValue)
-      }
+    const position = this._chart.canvas.getBoundingClientRect();
 
-      tooltipBody.appendChild(tooltipBodyItem)
-    })
+    const positionY = this._chart.canvas.offsetTop;
+    const positionX = this._chart.canvas.offsetLeft;
 
-    tooltip.innerHTML = ''
+    let positionLeft = positionX + tooltipModel.caretX;
+    const positionTop = positionY + tooltipModel.caretY;
+    // eslint-disable-next-line
+    const halfWidth = tooltipModel.width / 2;
 
-    tooltip.appendChild(tooltipHeader)
-    tooltip.appendChild(tooltipBody)
-  }
+    if (positionLeft + halfWidth > position.width) {
+        positionLeft -= halfWidth;
+    } else if (positionLeft < halfWidth) {
+        positionLeft += halfWidth;
+    }
 
-  const position = this._chart.canvas.getBoundingClientRect()
-
-  const positionY = this._chart.canvas.offsetTop
-  const positionX = this._chart.canvas.offsetLeft
-
-  let positionLeft = positionX + tooltipModel.caretX
-  const positionTop = positionY + tooltipModel.caretY
-  // eslint-disable-next-line
-  const halfWidth = tooltipModel.width / 2
-
-  if (positionLeft + halfWidth > position.width) {
-    positionLeft -= halfWidth
-  } else if (positionLeft < halfWidth) {
-    positionLeft += halfWidth
-  }
-
-  // Display, position, and set styles for font
-  tooltip.style.opacity = 1
-  tooltip.style.left = `${positionLeft}px`
-  tooltip.style.top = `${positionTop}px`
+    // Display, position, and set styles for font
+    tooltip.style.opacity = 1;
+    tooltip.style.left = `${positionLeft}px`;
+    tooltip.style.top = `${positionTop}px`;
 }

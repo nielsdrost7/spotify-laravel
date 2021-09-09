@@ -10,10 +10,8 @@
             <a class="btn" href="#">
                 <i class="icon-speech"></i>
             </a>
-            <a class="btn" href="./">
-                <i class="icon-graph"></i>  Dashboard</a>
-            <a class="btn" href="#">
-                <i class="icon-settings"></i>  Settings</a>
+            <a class="btn" href="./"> <i class="icon-graph"></i>  Dashboard</a>
+            <a class="btn" href="#"> <i class="icon-settings"></i>  Settings</a>
         </div>
     </li>
 </ol>
