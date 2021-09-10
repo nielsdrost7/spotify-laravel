@@ -21,6 +21,7 @@
         "guzzlehttp/guzzle": "^7.0",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.54",
+        "laravelcollective/html": "^6.2",
         "laravel/ui": "^3.0",
         "yajra/laravel-datatables-oracle": "^9.9"
     },
@@ -43,6 +44,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
+        "files": [
+            "app/helpers.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

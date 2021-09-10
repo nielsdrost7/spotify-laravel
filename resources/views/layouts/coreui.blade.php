@@ -51,7 +51,9 @@
         @include('partials.header')
         <div class="app-body">
             @include('partials.sidebar')
-            <main class="main">@yield('content')</main>
+            <main class="main">
+                @yield('content') @include('profile.userprofile')
+            </main>
         </div>
         @include('partials.footer')
 
@@ -63,34 +65,16 @@
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
+        <script
+            src="{{ mix('/js/custom.js') }}"
+            type="text/javascript"
+        ></script>
         <script>
-            $(function () {
-                let languages = {
-                    en: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json",
-                };
-
-                $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
-                    className: "btn-md",
-                });
-                // $.extend(true, $.fn.dataTable.defaults, {
-                //     responsive: true,
-                //     language: {
-                //         url: languages["{{ app()->getLocale() }}"],
-                //     },
-                //     columnDefs: [],
-                //     select: {
-                //         style: "multi+shift",
-                //         selector: "td:first-child",
-                //     },
-                //     order: [],
-                //     scrollX: true,
-                //     pageLength: 25,
-                //     //dom: 'lrtip<"actions">',
-                //     buttons: [],
-                // });
-            });
+            let loggedInUserId = "{{ getLoggedInUserId() }}";
+            let usersUrl = "{{ url('users') }}/";
         </script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+        <script src="{{ mix('/js/profile/userprofile.js') }}"></script>
         @stack('scripts')
     </body>
 </html>

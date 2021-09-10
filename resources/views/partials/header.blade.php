@@ -34,6 +34,25 @@
     </button>
 
     <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown d-md-down-none">
+            <a
+                class="nav-link"
+                data-toggle="dropdown"
+                href="#"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                Profile
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="#" class="dropdown-item btn btn-primary btn btn-default btn-flat"
+                   data-toggle="modal" data-id="{{ getLoggedInUserId() }}" data-target="#UserProfileModal">
+                    <i class="fa fa-key"></i>UserProfile
+                </a>
+            </div>
+        </li>
+
         <li class="nav-item dropdown">
             <a
                 aria-expanded="false"
@@ -53,7 +72,7 @@
                 <a
                     class="dropdown-item"
                     href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
+                    onclick="event.preventDefault(); localStorage.clear();
                     document.getElementById('logout-form').submit();"
                 >
                     {{ __("Logout") }}
