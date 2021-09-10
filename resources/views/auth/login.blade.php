@@ -12,7 +12,21 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icon-user"></i>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-1 w-1"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                                            />
+                                            <path
+                                                d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                                            />
+                                        </svg>
                                     </span>
                                 </div>
                                 <input
@@ -40,7 +54,18 @@
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="icon-lock"></i>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-1 w-1"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z"
+                                            />
+                                        </svg>
                                     </span>
                                 </div>
                                 <input

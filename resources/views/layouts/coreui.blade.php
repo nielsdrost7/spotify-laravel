@@ -73,29 +73,7 @@
                     scrollX: true,
                     pageLength: 100,
                     dom: 'lrtip<"actions">',
-                    buttons: [
-                        {
-                            extend: "selectAll",
-                            className: "btn-indigo",
-                            text: 'Select All',
-                            exportOptions: {
-                                columns: ":visible",
-                            },
-                            action: function (e, dt) {
-                                e.preventDefault();
-                                dt.rows().deselect();
-                                dt.rows({ search: "applied" }).select();
-                            },
-                        },
-                        {
-                            extend: "selectNone",
-                            className: "btn-indigo",
-                            text: 'Select None',
-                            exportOptions: {
-                                columns: ":visible",
-                            },
-                        },
-                    ],
+                    buttons: [],
                 });
             });
         </script>

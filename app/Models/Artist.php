@@ -11,11 +11,11 @@ class Artist extends Model
     use SoftDeletes;
 
     public $fillable = [
-                'name',
-                'uri',
-                'biography',
-                'listeners',
-        ];
+        'name',
+        'uri',
+        'biography',
+        'listeners',
+    ];
 
     public function albums(): HasMany
     {

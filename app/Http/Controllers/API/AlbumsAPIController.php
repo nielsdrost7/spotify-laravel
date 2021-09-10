@@ -12,15 +12,9 @@ class AlbumsAPIController extends AppBaseController
 {
     public function dataTable(Request $request): JsonResponse
     {
-        $albums = Album::select('id', 'name', 'playcount', 'uri')->orderBy('name');
+        $albums = Album::select('id', 'name', 'playcount', 'uri');
 
         return DataTables::of($albums)
-            ->addColumn('checkbox', function ($album) {
-                return '<input type="checkbox" name="pdr_checkbox[]" class="pdr_checkbox" value="' . $album->id . '" />';
-            })
-            ->editColumn('id', function ($album) {
-                return $album->id;
-            })
             ->editColumn('name', function ($album) {
                 return $album->name;
             })
@@ -35,7 +29,7 @@ class AlbumsAPIController extends AppBaseController
 
                 return $btn;
             })
-            ->rawColumns(['checkbox', 'action', 'href'])
+            ->rawColumns(['action', 'href'])
             ->make(true);
     }
 
