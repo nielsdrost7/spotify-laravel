@@ -11,12 +11,12 @@ class Track extends Model
     use SoftDeletes;
 
     public $fillable = [
-                'album_id',
-                'name',
-                'duration',
-                'rank',
-                'href',
-        ];
+        'album_id',
+        'name',
+        'duration',
+        'rank',
+        'href',
+    ];
 
     public function album(): BelongsTo
     {

@@ -47,6 +47,11 @@
                 width: "5%",
             },
         ],
+        dom: 'lrtip<"actions">',
+        lengthMenu: [
+            [ 10, 25, 50, 100, -1 ],
+            [ '10', '25', '50', '100', 'Show all' ]
+        ],
         columns: [
             { data: "name", name: "name" },
             { data: "playcount", name: "playcount" },

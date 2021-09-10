@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use App\Models\Artist;
+use DataTables;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class ArtistsAPIController extends AppBaseController
 
                 return $btn;
             })
-            ->rawColumns(['action', 'href'])
+            ->rawColumns(['action', 'uri'])
             ->make(true);
     }
 

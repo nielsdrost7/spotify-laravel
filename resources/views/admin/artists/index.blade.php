@@ -21,7 +21,7 @@
                     >
                         <thead>
                             <th>Name</th>
-                            <th>Playcount</th>
+                            <th>Listeners</th>
                             <th>Action</th>
                         </thead>
                         <tbody></tbody>
@@ -38,7 +38,7 @@
         processing: true,
         serverSide: true,
         order: [[0, "asc"]],
-        ajax: "{{ route('albums.dataTable') }}",
+        ajax: "{{ route('artists.dataTable') }}",
         columnDefs: [
             {
                 targets: [2],
@@ -47,9 +47,14 @@
                 width: "5%",
             },
         ],
+        dom: 'lrtip<"actions">',
+        lengthMenu: [
+            [ 10, 25, 50, 100, -1 ],
+            [ '10', '25', '50', '100', 'Show all' ]
+        ],
         columns: [
             { data: "name", name: "name" },
-            { data: "playcount", name: "playcount" },
+            { data: "listeners", name: "listeners" },
             {
                 data: "action",
                 name: "action",

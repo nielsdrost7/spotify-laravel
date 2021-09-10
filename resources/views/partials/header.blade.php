@@ -6,7 +6,25 @@
     >
         <span class="navbar-toggler-icon"> </span>
     </button>
-    <a class="navbar-brand" href="/">Spotify-Laravel </a>
+
+    <a class="navbar-brand" href="#">
+        <img
+            class="navbar-brand-full"
+            src="/img/favicon-32x32.png"
+            width="30"
+            height="30"
+            alt="InfyOm Logo"
+        />
+        <img
+            class="navbar-brand-minimized"
+            src="/img/favicon-16x16.png"
+            width="16"
+            height="16"
+            alt="InfyOm Logo"
+        />
+    </a>
+
+    {{-- <a class="navbar-brand" href="/">Spotify-Laravel </a> --}}
     <button
         class="navbar-toggler sidebar-toggler d-md-down-none"
         data-toggle="sidebar-lg-show"
@@ -14,6 +32,7 @@
     >
         <span class="navbar-toggler-icon"> </span>
     </button>
+
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a

@@ -9,6 +9,19 @@
         />
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/favicon-32x32.png"
+            sizes="32x32"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/img/favicon-16x16.png"
+            sizes="16x16"
+        />
+
         <title>Spotify-Laravel</title>
         {{--
         <script
@@ -59,22 +72,22 @@
                 $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
                     className: "btn-md",
                 });
-                $.extend(true, $.fn.dataTable.defaults, {
-                    responsive: true,
-                    language: {
-                        url: languages["{{ app()->getLocale() }}"],
-                    },
-                    columnDefs: [],
-                    select: {
-                        style: "multi+shift",
-                        selector: "td:first-child",
-                    },
-                    order: [],
-                    scrollX: true,
-                    pageLength: 100,
-                    dom: 'lrtip<"actions">',
-                    buttons: [],
-                });
+                // $.extend(true, $.fn.dataTable.defaults, {
+                //     responsive: true,
+                //     language: {
+                //         url: languages["{{ app()->getLocale() }}"],
+                //     },
+                //     columnDefs: [],
+                //     select: {
+                //         style: "multi+shift",
+                //         selector: "td:first-child",
+                //     },
+                //     order: [],
+                //     scrollX: true,
+                //     pageLength: 25,
+                //     //dom: 'lrtip<"actions">',
+                //     buttons: [],
+                // });
             });
         </script>
 
