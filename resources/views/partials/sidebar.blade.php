@@ -3,8 +3,11 @@
     <nav class="sidebar-nav">
         <nav class="sidebar-nav">
             <ul class="nav">
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="{{ route('admin.artists.index') }}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -15,21 +18,16 @@
                         >
                             <path
                                 d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
-                            />
-                        </svg>&nbsp;&nbsp;
-
-                        Artists</a
+                            /></svg
+                        >&nbsp;&nbsp;Artists</a
                     >
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.artists.index') }}">
-                                Artists</a
-                            >
-                        </li>
-                    </ul>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="{{ route('admin.albums.index') }}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -43,16 +41,12 @@
                             /></svg
                         >&nbsp;&nbsp;Albums</a
                     >
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.albums.index') }}">
-                                Albums</a
-                            >
-                        </li>
-                    </ul>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="{{ route('admin.playlists.index') }}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -66,16 +60,13 @@
                             /></svg
                         >&nbsp;&nbsp;Playlists</a
                     >
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.playlists.index') }}">
-                                Playlists</a
-                            >
-                        </li>
-                    </ul>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="{{ route('admin.tracks.index') }}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -89,13 +80,6 @@
                             /></svg
                         >&nbsp;&nbsp;Tracks</a
                     >
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.tracks.index') }}">
-                                Tracks</a
-                            >
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>
