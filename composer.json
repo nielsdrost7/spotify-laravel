@@ -16,13 +16,14 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2.5|^8.0",
+        "aerni/laravel-spotify": "^1.6",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.54",
-        "laravelcollective/html": "^6.2",
         "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.2",
         "yajra/laravel-datatables-oracle": "^9.9"
     },
     "require-dev": {

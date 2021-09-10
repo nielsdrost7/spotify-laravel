@@ -34,6 +34,14 @@
     </button>
 
     <ul class="nav navbar-nav ml-auto">
+
+
+        @if(!cache()->has('refreshToken'))
+            <li class="nav-item dropdown d-md-down-none">
+                <a class="btn border rounded px-4 py-1 border-white hover:opacity-75" href="{{ route('spotify.authorize') }}" target="_blank">Authorize</a>
+            </li>
+        @endif
+
         <li class="nav-item dropdown d-md-down-none">
             <a
                 class="nav-link"
