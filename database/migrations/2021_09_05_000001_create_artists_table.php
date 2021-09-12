@@ -10,18 +10,12 @@ class CreateArtistsTable extends Migration
     {
         Schema::create('artists', function (Blueprint $table): void {
             $table->increments('id');
-            $table->string('name', 70);
-            $table->string('uri', 70);
-            $table->text('biography')->nullable()->default(null);
-            $table->unsignedInteger('listeners');
+            $table->string('spotify_id', 45)->index();
+            $table->string('api_url', 191)->index();
+            $table->string('slug', 191)->index();
+            $table->string('name', 191)->index();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index(['uri'], 'uri');
-
-            $table->index(['listeners'], 'listeners');
-
-            $table->index(['name'], 'name');
         });
     }
 

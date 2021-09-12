@@ -10,20 +10,16 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table): void {
             $table->increments('id');
+
+            $table->string('spotify_id', 45)->index();
+            $table->string('api_url', 191)->index();
+
             $table->unsignedInteger('artist_id');
-            $table->string('name', 120);
-            $table->string('uri', 120);
-            $table->unsignedInteger('rank');
-            $table->unsignedInteger('playcount');
-            $table->string('release_date', 32)->nullable()->default(null);
-            $table->text('summary')->nullable()->default(null);
-            $table->string('href', 45)->nullable()->default(null);
+
+            $table->string('name', 191)->index();
+
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index(['artist_id'], 'artist_id');
-
-            $table->index(['playcount'], 'playcount');
 
             $table->foreign('artist_id', 'fk_albums_artists')
                 ->references('id')->on('artists')

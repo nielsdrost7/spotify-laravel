@@ -15,16 +15,8 @@ class SpotifyNowPlayingController extends AppBaseController
 
     public function nowPlaying()
     {
-        $nowPlaying = $this->spotifyNowPlayingService->getIsPlaying();
+        $nowPlaying = $this->spotifyNowPlayingService->getCurrentlyPlaying();
 
         return view('spotify.nowplaying')->with('nowPlaying', $nowPlaying);
-
-        // return view('dashboard-spotify-tile::tile', [
-        //     'refreshIntervalInSeconds' => config('dashboard.tiles.spotify.refresh_interval_in_seconds') ?? 60,
-        //     'isPlaying'                => $spotifyStore->getIsPlaying(),
-        //     'trackName'                => $spotifyStore->getTrackName(),
-        //     'albumImage'               => $spotifyStore->getAlbumImage(),
-        //     'artists'                  => $spotifyStore->getArtists(),
-        // ]);
     }
 }

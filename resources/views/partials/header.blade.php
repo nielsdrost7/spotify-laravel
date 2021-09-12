@@ -34,12 +34,23 @@
     </button>
 
     <ul class="nav navbar-nav ml-auto">
-
-
         @if(!cache()->has('refreshToken'))
-            <li class="nav-item dropdown d-md-down-none">
-                <a class="btn border rounded px-4 py-1 border-white hover:opacity-75" href="{{ route('spotify.authorize') }}" target="_blank">Authorize</a>
-            </li>
+        <li class="nav-item dropdown d-md-down-none">
+            <a
+                class="
+                    btn
+                    border
+                    rounded
+                    px-4
+                    py-1
+                    border-white
+                    hover:opacity-75
+                "
+                href="{{ route('spotify.authorize') }}"
+                target="_blank"
+                >Authorize</a
+            >
+        </li>
         @endif
 
         <li class="nav-item dropdown d-md-down-none">
@@ -54,8 +65,16 @@
                 Profile
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item btn btn-primary btn btn-default btn-flat"
-                   data-toggle="modal" data-id="{{ getLoggedInUserId() }}" data-target="#UserProfileModal">
+                <a
+                    href="#"
+                    class="
+                        dropdown-item
+                        btn btn-primary btn btn-default btn-flat
+                    "
+                    data-toggle="modal"
+                    data-id="{{ getLoggedInUserId() }}"
+                    data-target="#UserProfileModal"
+                >
                     <i class="fa fa-key"></i>UserProfile
                 </a>
             </div>

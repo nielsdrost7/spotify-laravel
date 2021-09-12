@@ -10,8 +10,11 @@ class CreatePlaylistsTable extends Migration
     {
         Schema::create('playlists', function (Blueprint $table): void {
             $table->increments('id');
-            $table->string('name', 120);
-            $table->string('uri', 120);
+
+            $table->string('spotify_id', 45)->index();
+            $table->string('api_url', 191)->index();
+            $table->string('name', 191)->index();
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,7 +7,11 @@
                 <div class="card-header">Now Playing</div>
                 <div class="card-body">
                     <div>
-                        @if($isPlaying)
+
+                        @if(!$nowPlaying)
+                        @else
+                            @dd($nowPlaying)
+                        @endif
                         <h1
                             class="
                                 font-medium
@@ -34,7 +38,7 @@
                                 leading-none
                             "
                         >
-                            {{ $trackName }}
+                            {{ $nowPlaying['trackName'] }}
                         </div>
                         <div>
                             <div
@@ -48,30 +52,16 @@
                             >
                                 <span class="text-xs text-dimmed">
                                     {{
-                                        implode(
-                                            ", ",
-                                            array_column($artists ?? [], "name")
-                                        )
+                                        $nowPlaying['trackArtist']
+                                    }}
+                                </span>
+                                <span class="text-xs text-dimmed">
+                                    {{
+                                        $nowPlaying['trackHref']
                                     }}
                                 </span>
                             </div>
                         </div>
-                        @else
-                        <div class="flex">
-                            <div class="w-full pt-8 bt-0">
-                                <div
-                                    class="
-                                        flex
-                                        justify-center
-                                        text-2xl text-grey-darkest
-                                        font-medium
-                                    "
-                                >
-                                    <h2>Spotify is not currently playing :(</h2>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>

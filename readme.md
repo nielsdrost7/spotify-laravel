@@ -2,10 +2,7 @@
 This code is still under construction, Work in Progress.
 
 The idea was, to make an application to manage my playlists on Spotify.
-I created Artists, Albums, Tracks and Playlists in this application.
-
-Then, in the front, you can just see what you have (Like Spotify itself)
-In the back, when you log in, you can manage those items.
+I created views for Artists, Albums, Tracks and Playlists in this application.
 
 ## Setup for local development
 
@@ -33,3 +30,19 @@ Configure the `.env` to your needs (database name, username, password)
 yarn install
 yarn run dev
 ```
+
+# Spotify
+Go to https://developer.spotify.com/dashboard/ and create an account
+If you want to make an application using the API of Spotify, you need to Create an application inside that dashboard.
+It will give you a client ID and a client Secret
+
+In the .env file you need to fill SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET
+
+## Spotify authorization
+Go to http://spoti.local/spotify/authorize (one time)
+Spotify will ask you to authorize this application, click Yes / Ok
+It will send a code to http://spoti.local/spotify/callback which in its turn will save / cache the access token, refresh token, the usual
+
+## Todo
+Improve the authorize / callback flow. When the access token expires (after 1 hour) you should automatically need to get a new token.
+There's some bugs in there.

@@ -10,15 +10,12 @@ class CreateTracksTable extends Migration
     {
         Schema::create('tracks', function (Blueprint $table): void {
             $table->increments('id');
-            $table->unsignedInteger('album_id');
-            $table->string('name', 120);
-            $table->string('duration', 12);
-            $table->unsignedInteger('rank');
-            $table->string('href', 45)->nullable()->default(null);
+            $table->string('spotify_id', 45)->index();
+            $table->string('api_url', 191)->index();
+            $table->unsignedInteger('album_id', 45);
+            $table->string('name', 191)->index();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index(['album_id'], 'artist_id');
 
             $table->foreign('album_id', 'fk_tracks_albums')
                 ->references('id')->on('albums')
