@@ -16,7 +16,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2.5|^8.0",
-        "aerni/laravel-spotify": "^1.6",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
