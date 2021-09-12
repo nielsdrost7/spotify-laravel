@@ -5,9 +5,9 @@ namespace App\Console\Spotify;
 use App\Services\SpotifyAuthService;
 use Illuminate\Console\Command;
 
-class FetchDataFromSpotify extends Command
+class RefreshTokenFromSpotify extends Command
 {
-    protected $signature = 'spotify:fetch-data-from-spotify';
+    protected $signature = 'spotify:refresh-token';
 
     protected $description = 'Refresh spotify access token';
 
@@ -16,9 +16,6 @@ class FetchDataFromSpotify extends Command
         $this->spotifyAuthService = new SpotifyAuthService();
         $this->info('Refreshing access token...');
         $this->spotifyAuthService->refreshTokens();
-
-        //Http::get(config('app.url') . '/spotify/refresh');
-
         $this->info('Refresh complete.');
     }
 }
