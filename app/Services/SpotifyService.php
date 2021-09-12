@@ -143,7 +143,7 @@ class SpotifyService
         }
 
         if ($response->failed()) {
-            $this->handleResponseError($responseBody);
+            $this->handleResponseError($response);
         }
         $responseBody = $response->json();
         $this->lastResponse = [

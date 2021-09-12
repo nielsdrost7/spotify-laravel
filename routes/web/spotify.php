@@ -8,3 +8,10 @@ Route::get('/spotify/callback', [SpotifyAuthController::class, 'storeTokens'])->
 Route::get('/spotify/refresh', [SpotifyAuthController::class, 'refreshTokens'])->name('spotify.refresh');
 
 Route::get('/spotify/nowplaying', [SpotifyNowPlayingController::class, 'nowPlaying'])->name('spotify.nowplaying');
+
+Route::get('/spotify/playlists', [SpotifyNowPlayingController::class, 'playlists'])->name('spotify.playlists');
+
+Route::get(
+    '/spotify/playlists/{playlistId}/tracks',
+    [SpotifyNowPlayingController::class, 'playlistsTracks']
+)->name('spotify.playlists.tracks');

@@ -44,5 +44,7 @@ Spotify will ask you to authorize this application, click Yes / Ok
 It will send a code to http://spoti.local/spotify/callback which in its turn will save / cache the access token, refresh token, the usual
 
 ## Todo
-Improve the authorize / callback flow. When the access token expires (after 1 hour) you should automatically need to get a new token.
+- Need to work on processing paginated items. In the artisan command fetch-data I'm fetching 10.000 items. 100 per page. How to process it properly. Challenge.
+- Improve the authorize / callback flow. When the access token expires (after 1 hour) you should automatically need to get a new token.
 There's some bugs in there.
+- At this point, when session times out, you'll get a 401 unauthorized exception. Need to handle that properly in the SpotifyService
