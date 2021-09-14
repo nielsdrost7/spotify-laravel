@@ -31,6 +31,21 @@ yarn install
 yarn run dev
 ```
 
+### Redis
+I've set up queues running through Redis, in the `config/queue.php` there's some configurations for that. Also `config/database.php` had to be adjusted slightly.
+In the .env.example I've set the host for redis to `redis`, because that's in the docker setup. The QUEUE_CONNECTION is set to `redis` as well
+
+### Artisan commands
+There are 2 commands for now:
+- `spotify:refresh-token`, which will refresh the access token. You can run this in a scheduler every 59 minutes, since the access token expires every 60 minutes
+
+and
+- `spotify:fetch-data`, which will fetch the data from a single spotify playlist (I have 10.000 tracks in there, including duplicates) and it will then process those tracks, including Artists, Albums.
+This will be sent to the `default` queue for now.
+
+### Queues
+In this case I'm running my queue worker through ``` bash php artisan queue:work --daemon```, it will pick up the queued actions in the artisan command
+
 # Spotify
 Go to https://developer.spotify.com/dashboard/ and create an account
 If you want to make an application using the API of Spotify, you need to Create an application inside that dashboard.
