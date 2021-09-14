@@ -49,5 +49,6 @@ class TrackSaveAction
 
             return $newTrack;
         });
+        $keyedTracks->count();
     }
 }

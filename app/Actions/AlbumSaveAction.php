@@ -50,5 +50,6 @@ class AlbumSaveAction
 
             return $newAlbum;
         });
+        dump($keyedAlbums->count());
     }
 }

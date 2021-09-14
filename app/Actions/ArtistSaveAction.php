@@ -37,5 +37,6 @@ class ArtistSaveAction
 
             return $newArtist;
         });
+        dump($keyedArtists->count());
     }
 }

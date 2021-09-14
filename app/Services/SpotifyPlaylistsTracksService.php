@@ -27,8 +27,6 @@ class SpotifyPlaylistsTracksService extends SpotifyService
             return $t;
         });
 
-        dd($playlistsTracks);
-
         $data = Arr::get($playlistsTracks, 'items') ?? null;
 
         return $data;
@@ -44,7 +42,7 @@ class SpotifyPlaylistsTracksService extends SpotifyService
 
         $numberOfPages = (int) ceil(($tracks['total'] / $tracks['limit']));
 
-        for ($i = 0; $i <= 1; $i++) {
+        for ($i = 0; $i <= $numberOfPages; $i++) {
             $uri = '/v1/playlists/' . $playlistId . '/tracks';
             $parameters = [
                 'offset' => $i * 100,
