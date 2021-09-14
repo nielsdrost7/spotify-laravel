@@ -45,61 +45,58 @@ class SpotifyPlaylistsTracksService extends SpotifyService
         $numberOfPages = (int) ceil(($tracks['total'] / $tracks['limit']));
 
         for ($i = 0; $i <= 1; $i++) {
-            $uri = str_replace('https://api.spotify.com', '', $tracks['next']);
-            $trackItems[] = $this->getPaginatedPlaylistsTracks($uri);
+            $uri = '/v1/playlists/' . $playlistId . '/tracks';
+            $parameters = [
+                'offset' => $i * 100,
+                'limit'  => 100,
+            ];
+            $items[] = $this->getPaginatedPlaylistsTracks($uri, $parameters);
         }
 
-        dd('trackitems', $trackItems);
-        $temp = array_merge($tracks, $trackItems);
-        dd('temp', $temp);
+        $trackItems = collect($items)->flatten(1)->unique();
 
-        $trackItems = collect($tracks['items']);
-
-        $playlistsTracks = $trackItems->map(function ($track) {
-            $trackColl = collect($track['track']);
-            $t = $trackColl->only(
-                'id',
-                'name',
-                'artists',
-                'album',
-                'href',
-                'uri'
-            );
-
-            return $t;
-        });
-
-        dd($playlistsTracks->first()['name']);
-
-        return $data;
+        return $trackItems;
     }
 
-    private function getPaginatedPlaylistsTracks($uri)
+    private function getPaginatedPlaylistsTracks($uri, $parameters)
     {
         $tracks = $this->sendGetRequest(
-            $uri
+            $uri,
+            $parameters
         );
         $trackItems = collect($tracks['items']);
 
-        dump($tracks['next']);
-
         $playlistsTracks = $trackItems->map(function ($track) {
-            $trackColl = collect($track['track']);
-            $t = $trackColl->only(
+            $artistsColl = collect($track['track']['artists'][0]);
+            $trackColl = collect($track['track'], $track['track']['album']);
+            $albumColl = collect($track['track']['album']);
+
+            $returnTrack['artist'] = $artistsColl->only(
                 'id',
                 'name',
+                'href',
+                'uri',
+            );
+
+            $returnTrack['album'] = $albumColl->only([
+                'id',
                 'artists',
+                'name',
+                'href',
+                'uri',
+            ]);
+
+            $returnTrack['track'] = $trackColl->only(
+                'id',
                 'album',
+                'name',
                 'href',
                 'uri'
             );
 
-            return $t;
+            return $returnTrack;
         });
 
-        $data['name'] = $playlistsTracks->first()['name'];
-        $data['next'] = $tracks['next'];
-
-        return $data;
+        return $playlistsTracks;
     }
 }

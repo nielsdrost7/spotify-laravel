@@ -125,7 +125,9 @@ class SpotifyService
 
         if (is_array($parameters) || is_object($parameters)) {
             $parameters = http_build_query($parameters, '', '&');
+            dump($parameters);
         }
+
         $this->accessToken = $this->spotifyAuthService->getAccessToken();
 
         try {
@@ -137,7 +139,7 @@ class SpotifyService
             ->withToken(
                 $this->accessToken
             )
-            ->get(self::API_URL . $endpoint);
+            ->get(self::API_URL . $endpoint . '/?' . $parameters);
         } catch (Exception $e) {
             dd($e);
         }

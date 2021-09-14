@@ -11,10 +11,10 @@ class Artist extends Model
     use SoftDeletes;
 
     public $fillable = [
+        'spotify_id',
+        'spotify_uri',
+        'api_url',
         'name',
-        'uri',
-        'biography',
-        'listeners',
     ];
 
     public function albums(): HasMany

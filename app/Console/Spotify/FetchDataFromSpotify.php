@@ -2,6 +2,9 @@
 
 namespace App\Console\Spotify;
 
+use App\Actions\AlbumSaveAction;
+use App\Actions\ArtistSaveAction;
+use App\Actions\TrackSaveAction;
 use App\Services\SpotifyPlaylistsTracksService;
 use Illuminate\Console\Command;
 
@@ -17,7 +20,21 @@ class FetchDataFromSpotify extends Command
     {
         $this->spotifyPlaylistsTracksService = new SpotifyPlaylistsTracksService();
         $this->info('Fetching Data');
-        $this->spotifyPlaylistsTracksService->getMassDataPlaylistsTracks($this->spotifyPlaylistId);
+        $allItemsUnique = $this->spotifyPlaylistsTracksService->getMassDataPlaylistsTracks($this->spotifyPlaylistId);
+
+        $artists = $allItemsUnique->pluck('artist');
+        $albums = $allItemsUnique->pluck('album');
+        $tracks = $allItemsUnique->pluck('track');
+        (new ArtistSaveAction())->onQueue()->execute($artists);
+
+        $this->info('Artists are done, Working on Albums');
+
+        (new AlbumSaveAction())->onQueue()->execute($albums);
+
+        $this->info('Albums are done, Working on Tracks');
+
+        (new TrackSaveAction())->onQueue()->execute($tracks);
+
         $this->info('Fetching Data and deduplicating complete.');
     }
 }

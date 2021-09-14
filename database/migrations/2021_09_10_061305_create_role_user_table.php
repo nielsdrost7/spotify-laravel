@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateRoleUserTable extends Migration
 {
-
     public function up(): void
     {
         Schema::create('role_user', function (Blueprint $table): void {
@@ -16,7 +15,6 @@ class CreateRoleUserTable extends Migration
             $table->foreign('user_id', 'role_user_users')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
-
 
     public function down(): void
     {

@@ -11,11 +11,10 @@ class Track extends Model
     use SoftDeletes;
 
     public $fillable = [
-        'album_id',
+        'spotify_id',
+        'spotify_uri',
+        'api_url',
         'name',
-        'duration',
-        'rank',
-        'href',
     ];
 
     public function album(): BelongsTo

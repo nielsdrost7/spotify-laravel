@@ -23,6 +23,8 @@
         "laravel/framework": "^8.54",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
+        "predis/predis": "~1.0",
+        "spatie/laravel-queueable-action": "^2.12",
         "yajra/laravel-datatables-oracle": "^9.9"
     },
     "require-dev": {

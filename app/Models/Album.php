@@ -12,22 +12,18 @@ class Album extends Model
     use SoftDeletes;
 
     public $fillable = [
-                'artist_id',
-                'name',
-                'uri',
-                'rank',
-                'playcount',
-                'release_date',
-                'summary',
-                'href',
-        ];
+        'spotify_id',
+        'spotify_uri',
+        'api_url',
+        'name',
+    ];
 
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class, 'artist_id');
     }
 
-    public function albumsTracks(): HasMany
+    public function tracks(): HasMany
     {
         return $this->hasMany(Track::class, 'album_id');
     }

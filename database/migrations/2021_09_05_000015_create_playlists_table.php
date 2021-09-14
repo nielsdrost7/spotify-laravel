@@ -13,6 +13,7 @@ class CreatePlaylistsTable extends Migration
 
             $table->string('spotify_id', 45)->index();
             $table->string('api_url', 191)->index();
+            $table->string('spotify_uri', 191)->index();
             $table->string('name', 191)->index();
 
             $table->timestamps();
