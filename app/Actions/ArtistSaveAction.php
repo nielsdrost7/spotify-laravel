@@ -37,6 +37,7 @@ class ArtistSaveAction
 
             return $newArtist;
         });
+        dump('Artists are done');
         dump($keyedArtists->count());
     }
 }

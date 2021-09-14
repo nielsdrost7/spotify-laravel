@@ -28,15 +28,17 @@ class TrackSaveAction
     public function execute($tracks)
     {
         $keyedTracks = $tracks->map(function ($track) {
-            $album = $track['album'];
+            $album = $track['album'] ?? null;
 
-            $foundAlbum = Album::updateOrCreate([
-                'name' => $album['name'],
-            ], [
-                'spotify_id'  => $album['id'],
-                'api_url'     => $album['href'],
-                'spotify_uri' => $album['uri'],
-            ]);
+            if (!is_null($album)) {
+                $foundAlbum = Album::updateOrCreate([
+                    'name' => $album['name'],
+                ], [
+                    'spotify_id'  => $album['id'],
+                    'api_url'     => $album['href'],
+                    'spotify_uri' => $album['uri'],
+                ]);
+            }
 
             $newTrack = Track::updateOrCreate([
                 'spotify_id' => $track['id'],
@@ -45,10 +47,14 @@ class TrackSaveAction
                 'spotify_uri' => $track['uri'],
                 'name'        => $track['name'],
             ]);
-            $foundAlbum->tracks()->save($newTrack);
+
+            if (!is_null($album)) {
+                $foundAlbum->tracks()->save($newTrack);
+            }
 
             return $newTrack;
         });
+        dump('Tracks are done');
         $keyedTracks->count();
     }
 }
