@@ -97,4 +97,23 @@ class SpotifyPlaylistsTracksService extends SpotifyService
 
         return $playlistsTracks;
     }
+
+    public function addPlaylistTracks($playlistId, $trackUris, $options = [])
+    {
+        $playlistId = '2PG4sqjxUor5k1PtITTc0f';
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
+
+        $this->lastResponse = $this->sendPostRequest(
+            $uri,
+            $trackUris,
+            $headers
+        );
+
+        return $this->lastResponse;
+    }
 }

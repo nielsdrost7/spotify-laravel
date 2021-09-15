@@ -45,6 +45,7 @@ class SpotifyService
      */
     protected function handleResponseError($responseBody): void
     {
+        dd('responseBody', $responseBody);
         $error = (object) $responseBody['error'];    // Object!
 
         if (isset($error->message) && isset($error->status)) {
@@ -155,6 +156,61 @@ class SpotifyService
             'body'         => $responseBody,
             'headers'      => $response->headers(),
         ];
+
+        return $responseBody;
+    }
+
+    /**
+     * Make a request to Spotify.
+     *
+     * @param string $url        the URL to request
+     * @param array  $parameters Optional. Query string parameters or HTTP body, depending on $method.
+     * @param array  $headers    Optional. HTTP headers.
+     *                           //GuzzleHttp\Psr7\Response
+     *
+     * @throws SpotifyException
+     *
+     * @return array Response data.
+     *               - array|object body The response body. Type is controlled by the `return_assoc` option.
+     *               - array headers Response headers.
+     *               - int status HTTP status code.
+     *               - string url The requested URL.
+     */
+    public function sendPostRequest($endpoint, $trackUris = [], $headers = [])
+    {
+        $this->lastResponse = [];
+
+        $this->accessToken = $this->spotifyAuthService->getAccessToken();
+
+        try {
+            $response = Http::withHeaders([
+                'Accept'       => 'application/json',
+                'Content-Type' => 'application/json',
+            ])
+            ->acceptJson()
+            ->withToken(
+                $this->accessToken
+            )
+            ->post(self::API_URL . $endpoint, [
+                'uris' => $trackUris,
+            ]);
+        } catch (Exception $e) {
+            dd($e);
+        }
+
+        if ($response->failed()) {
+            dd('failed', $response->getReasonPhrase(), $trackUris);
+            $this->handleResponseError($response);
+        }
+        $responseBody = $response->json();
+        $this->lastResponse = [
+            'url'          => $endpoint,
+            'status'       => $response->getStatusCode(),
+            'reasonPhrase' => $response->getReasonPhrase(),
+            'body'         => $responseBody,
+            'headers'      => $response->headers(),
+        ];
+        dump('Status', $response->getReasonPhrase());
 
         return $responseBody;
     }

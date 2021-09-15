@@ -22,12 +22,14 @@ class SpotifyAuthController extends Controller
             'user-read-private',
             'user-read-email',
             'user-read-playback-state',
-            'user-read-currently-playing', // isn't this the only one necessary?
+            'user-read-currently-playing',
             'user-modify-playback-state',
             'user-read-playback-position',
             'user-read-recently-played',
             'app-remote-control',
             'streaming',
+            'playlist-modify-public',
+            'playlist-modify-private',
         ];
 
         $baseUrl = 'https://accounts.spotify.com/authorize';

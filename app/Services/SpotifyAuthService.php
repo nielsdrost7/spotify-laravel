@@ -20,7 +20,7 @@ class SpotifyAuthService
     private $redirect_uri;
 
     private $scopes = 'user-read-private user-read-email streaming app-remote-control user-read-playback-state user-read-currently-playing
-user-modify-playback-state user-read-playback-position user-read-recently-played';
+user-modify-playback-state user-read-playback-position user-read-recently-played playlist-modify-public playlist-modify-private';
 
     public function __construct()
     {

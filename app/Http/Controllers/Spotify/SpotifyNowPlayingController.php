@@ -35,7 +35,6 @@ class SpotifyNowPlayingController extends AppBaseController
     public function playlistsTracks(Request $request, string $playlistId)
     {
         $playlistsTracks = $this->spotifyPlaylistsTracksService->getAllPlaylistsTracks($playlistId);
-        dd($playlistsTracks);
 
         return view('spotify.playlists.index')->with('playlistsTracks', $playlistsTracks);
     }
