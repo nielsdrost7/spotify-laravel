@@ -25,11 +25,11 @@ class FetchDataFromSpotify extends Command
         $artists = $allItemsUnique->pluck('artist');
         $albums = $allItemsUnique->pluck('album');
         $tracks = $allItemsUnique->pluck('track');
-        (new ArtistSaveAction())->onQueue()->execute($artists);
+        //(new ArtistSaveAction())->onQueue()->execute($artists);
 
         $this->info('Artists sent to queue, Working on Albums');
 
-        (new AlbumSaveAction())->onQueue()->execute($albums);
+        //(new AlbumSaveAction())->onQueue()->execute($albums);
 
         $this->info('Albums sent to queue, Working on Tracks');
 

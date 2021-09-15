@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\Album;
 use App\Models\Track;
+use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
 
 class TrackSaveAction
@@ -45,12 +46,13 @@ class TrackSaveAction
             ], [
                 'api_url'     => $track['href'],
                 'spotify_uri' => $track['uri'],
-                'name'        => $track['name'],
+                'name'        => Str::of($track['name'])->limit(191),
             ]);
 
             if (!is_null($album)) {
                 $foundAlbum->tracks()->save($newTrack);
             }
+            dump($newTrack->id);
 
             return $newTrack;
         });

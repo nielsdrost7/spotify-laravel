@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Artist;
+use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
 
 class ArtistSaveAction
@@ -32,8 +33,9 @@ class ArtistSaveAction
             ], [
                 'api_url'     => $artist['href'],
                 'spotify_uri' => $artist['uri'],
-                'name'        => $artist['name'],
+                'name'        => Str::of($artist['name'])->limit(191),
             ]);
+            dump($newArtist->id);
 
             return $newArtist;
         });

@@ -34,9 +34,9 @@ class AlbumSaveAction
                 $foundArtist = Artist::updateOrCreate([
                     'name' => $artist['name'],
                 ], [
+                    'spotify_id'  => $artist['id'],
                     'api_url'     => $artist['href'],
                     'spotify_uri' => $artist['uri'],
-                    'name'        => $artist['name'],
                 ]);
             }
 
@@ -45,12 +45,13 @@ class AlbumSaveAction
             ], [
                 'api_url'     => $album['href'],
                 'spotify_uri' => $album['uri'],
-                'name'        => $album['name'],
+                'name'        => Str::of($album['name'])->limit(191),
             ]);
 
             if (!is_null($artist)) {
                 $foundArtist->albums()->save($newAlbum);
             }
+            dump($newAlbum->id);
 
             return $newAlbum;
         });

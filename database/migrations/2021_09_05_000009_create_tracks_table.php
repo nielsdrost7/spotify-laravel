@@ -11,7 +11,7 @@ class CreateTracksTable extends Migration
     {
         Schema::create('tracks', function (Blueprint $table): void {
             $table->increments('id');
-            $table->string('spotify_id', 45)->index();
+            $table->string('spotify_id', 191)->index();
             $table->string('api_url', 191)->index();
             $table->string('spotify_uri', 191)->index();
             $table->foreignIdFor(Album::class);
