@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\Album;
 use App\Models\Artist;
+use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
 
 class AlbumSaveAction
@@ -20,15 +21,11 @@ class AlbumSaveAction
         // Prepare the action for execution, leveraging constructor injection.
     }
 
-    /**
-     * Execute the action.
-     *
-     * @return mixed
-     */
-    public function execute($albums)
+    public function execute($albums): void
     {
         $keyedAlbums = $albums->each(function ($album) {
             $artist = $album['artists'][0] ?? null;
+            dump('ArtistDump', $artist);
 
             if (!is_null($artist)) {
                 $foundArtist = Artist::updateOrCreate([
@@ -39,6 +36,7 @@ class AlbumSaveAction
                     'spotify_uri' => $artist['uri'],
                 ]);
             }
+            dd('FoundArtist', $foundArtist);
 
             $newAlbum = Album::updateOrCreate([
                 'spotify_id' => $album['id'],
@@ -49,9 +47,11 @@ class AlbumSaveAction
             ]);
 
             if (!is_null($artist)) {
-                $foundArtist->albums()->save($newAlbum);
+                $newAlbum->artist()->save($foundArtist);
             }
-            dump($newAlbum->id);
+
+            dd($foundArtist);
+            dd($newAlbum->id, $newAlbum->artist_id, $newAlbum->name);
 
             return $newAlbum;
         });

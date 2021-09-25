@@ -15,7 +15,9 @@ class FetchDataFromSpotify extends Command
 
     protected $description = 'Fetch spotify data (and deduplicate)';
 
-    protected $spotifyPlaylistId = '7DS263hH2FI4LzEh4m3DES';
+    protected $spotifyPlaylistId = '5W2G6VALfr94wc13VRnUNi';
+
+    protected $destinationPlaylistId = '2PG4sqjxUor5k1PtITTc0f';
 
     public function handle(): void
     {
@@ -26,16 +28,17 @@ class FetchDataFromSpotify extends Command
         $artists = $allItemsUnique->pluck('artist');
         $albums = $allItemsUnique->pluck('album');
         $tracks = $allItemsUnique->pluck('track');
-        //(new ArtistSaveAction())->onQueue()->execute($artists);
+        (new ArtistSaveAction())->onQueue()->execute($artists);
 
-        //$this->info('Artists sent to queue, Working on Albums');
+        $this->info('Artists sent to queue, Working on Albums');
 
         //(new AlbumSaveAction())->onQueue()->execute($albums);
 
         //$this->info('Albums sent to queue, Working on Tracks');
 
-        //(new TrackSaveAction())->onQueue()->execute($tracks);
-        (new TrackPushAction())->onQueue()->execute($this->spotifyPlaylistId, $tracks);
+        (new TrackSaveAction())->onQueue()->execute($tracks);
+
+        (new TrackPushAction())->onQueue()->execute($this->destinationPlaylistId, $tracks);
 
         $this->info('Fetching Data and deduplicating complete.');
     }

@@ -100,7 +100,7 @@ class SpotifyPlaylistsTracksService extends SpotifyService
 
     public function addPlaylistTracks($playlistId, $trackUris, $options = [])
     {
-        $playlistId = '2PG4sqjxUor5k1PtITTc0f';
+        //$playlistId = '2SbVATMTXA76bVYq7Ks06Z';
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -113,6 +113,27 @@ class SpotifyPlaylistsTracksService extends SpotifyService
             $trackUris,
             $headers
         );
+
+        return $this->lastResponse;
+    }
+
+    public function deletePlaylistTracks($playlistId, $trackUris, $options = [])
+    {
+        if (null === $playlistId) {
+            $playlistId = '2SbVATMTXA76bVYq7Ks06Z';
+        }
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
+
+        $this->lastResponse = $this->sendDeleteRequest(
+            $uri,
+            $trackUris,
+            $headers
+        );
+        dump($this->lastResponse['reasonPhrase']);
 
         return $this->lastResponse;
     }

@@ -214,4 +214,58 @@ class SpotifyService
 
         return $responseBody;
     }
+
+    /**
+     * Make a request to Spotify.
+     *
+     * @param string $url        the URL to request
+     * @param array  $parameters Optional. Query string parameters or HTTP body, depending on $method.
+     * @param array  $headers    Optional. HTTP headers.
+     *                           //GuzzleHttp\Psr7\Response
+     *
+     * @throws SpotifyException
+     *
+     * @return array Response data.
+     *               - array|object body The response body. Type is controlled by the `return_assoc` option.
+     *               - array headers Response headers.
+     *               - int status HTTP status code.
+     *               - string url The requested URL.
+     */
+    public function sendDeleteRequest($endpoint, $trackUris = [], $headers = []): array
+    {
+        $this->lastResponse = [];
+
+        $this->accessToken = $this->spotifyAuthService->getAccessToken();
+
+        try {
+            $response = Http::withHeaders([
+                'Accept'       => 'application/json',
+                'Content-Type' => 'application/json',
+            ])
+            ->acceptJson()
+            ->withToken(
+                $this->accessToken
+            )
+            ->delete(self::API_URL . $endpoint, [
+                'uris' => $trackUris,
+            ]);
+        } catch (Exception $e) {
+            dd('Exception deleting uris', $e);
+        }
+
+        if ($response->failed()) {
+            dd('failed', $response->getReasonPhrase(), $trackUris);
+            $this->handleResponseError($response);
+        }
+        $responseBody = $response->json();
+        $this->lastResponse = [
+            'url'          => $endpoint,
+            'status'       => $response->getStatusCode(),
+            'reasonPhrase' => $response->getReasonPhrase(),
+            'body'         => $responseBody,
+            'headers'      => $response->headers(),
+        ];
+
+        return $this->lastResponse;
+    }
 }

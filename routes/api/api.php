@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\AlbumsAPIController;
-use App\Http\Controllers\API\ArtistsAPIController;
 use App\Http\Controllers\API\PlaylistsAPIController;
-use App\Http\Controllers\API\TracksAPIController;
 
-Route::group(['prefix' => 'v1'], function (): void {
+Route::group(['prefix' => 'v1', 'as' => 'api.'], function (): void {
     Route::get(
         '/albums/dataTable',
         [AlbumsAPIController::class, 'dataTable']
@@ -16,21 +14,8 @@ Route::group(['prefix' => 'v1'], function (): void {
     )->name('albums.multiDelete');
     Route::get(
         '/album/{album}',
-        [AlbumsAPIController::class, 'getArtist']
+        [AlbumsAPIController::class, 'getAlbum']
     )->name('album.show');
-
-    Route::get(
-        '/artists/dataTable',
-        [ArtistsAPIController::class, 'dataTable']
-    )->name('artists.dataTable');
-    Route::post(
-        '/artists/multiDelete',
-        [ArtistsAPIController::class, 'multiDelete']
-    )->name('artists.multiDelete');
-    Route::get(
-        '/artist/{artist}',
-        [ArtistsAPIController::class, 'getArtist']
-    )->name('artist.show');
 
     Route::get(
         '/playlists/dataTable',
@@ -44,17 +29,4 @@ Route::group(['prefix' => 'v1'], function (): void {
         '/playlist/{playlist}',
         [PlaylistsAPIController::class, 'getPlaylist']
     )->name('playlist.show');
-
-    Route::get(
-        '/tracks/dataTable',
-        [TracksAPIController::class, 'dataTable']
-    )->name('tracks.dataTable');
-    Route::post(
-        '/tracks/multiDelete',
-        [TracksAPIController::class, 'multiDelete']
-    )->name('tracks.multiDelete');
-    Route::get(
-        '/track/{track}',
-        [TracksAPIController::class, 'getTrack']
-    )->name('track.show');
 });

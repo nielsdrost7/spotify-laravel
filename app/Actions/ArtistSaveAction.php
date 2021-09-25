@@ -20,12 +20,7 @@ class ArtistSaveAction
         // Prepare the action for execution, leveraging constructor injection.
     }
 
-    /**
-     * Execute the action.
-     *
-     * @return mixed
-     */
-    public function execute($artists)
+    public function execute($artists): void
     {
         $keyedArtists = $artists->each(function ($artist) {
             $newArtist = Artist::updateOrCreate([
@@ -35,7 +30,7 @@ class ArtistSaveAction
                 'spotify_uri' => $artist['uri'],
                 'name'        => Str::of($artist['name'])->limit(191),
             ]);
-            dump($newArtist->id);
+            dump($newArtist->id, $newArtist->name);
 
             return $newArtist;
         });

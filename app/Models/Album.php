@@ -6,10 +6,11 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kirschbaum\PowerJoins\PowerJoins;
 
 class Album extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, PowerJoins;
 
     public $fillable = [
         'spotify_id',
@@ -20,7 +21,7 @@ class Album extends Model
 
     public function artist(): BelongsTo
     {
-        return $this->belongsTo(Artist::class, 'artist_id');
+        return $this->belongsTo(Artist::class, 'artist_id')->orderBy('name', 'asc');
     }
 
     public function tracks(): HasMany

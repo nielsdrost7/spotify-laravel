@@ -4,48 +4,71 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use App\Models\Album;
+use App\Services\SpotifyPlaylistsTracksService;
 use DataTables;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AlbumsAPIController extends AppBaseController
 {
-    public function dataTable(Request $request): JsonResponse
+    public function __construct()
     {
-        $albums = Album::select('id', 'name', 'playcount', 'uri');
-
-        return DataTables::of($albums)
-            ->editColumn('name', function ($album) {
-                return $album->name;
-            })
-            ->editColumn('playcount', function ($album) {
-                return $album->playcount;
-            })
-            ->editColumn('uri', function ($album) {
-                return $album->uri;
-            })
-            ->addColumn('action', function ($album) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-
-                return $btn;
-            })
-            ->rawColumns(['action', 'href'])
-            ->make(true);
+        $this->spotifyPlaylistsTracksService = new SpotifyPlaylistsTracksService();
     }
 
-    public function index(Request $request): JsonResponse
+    public function dataTable(Request $request): JsonResponse
     {
-        $query = Album::query();
+        $albums = Album::select(
+            'id',
+            'spotify_id',
+            'spotify_uri',
+            'api_url',
+            'name',
+        )
+        ->groupBy('spotify_id')
+        ->orderBy('name')
+        ->limit(5000);
 
-        if ($request->get('skip')) {
-            $query->skip($request->get('skip'));
-        }
-        if ($request->get('limit')) {
-            $query->limit($request->get('limit'));
-        }
+        return DataTables::of($albums)
 
-        $albums = $query->get();
+        ->addColumn('placeholder', '&nbsp;')
 
-        return $this->sendResponse($albums->toArray(), 'Albums retrieved successfully');
+        ->editColumn(
+            'id',
+            function (Album $album) {
+                return $album->id ?? '';
+            }
+        )
+        ->editColumn(
+            'name',
+            function (Album $album) {
+                return $album->name ?? '';
+            }
+        )
+        ->editColumn(
+            'spotify_id',
+            function (Album $album) {
+                return $album->spotify_id ?? '';
+            }
+        )
+        ->editColumn(
+            'spotify_uri',
+            function (Album $album) {
+                return $album->spotify_uri ?? '';
+            }
+        )
+        ->editColumn(
+            'api_url',
+            function (Album $album) {
+                return $album->api_url ?? '';
+            }
+        )
+        ->rawColumns(['placeholder'])
+        ->make(true);
+    }
+
+    public function multiDelete(Request $request): void
+    {
+        dd($request->spotifyIds);
     }
 }

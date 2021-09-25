@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Album;
+use App\Models\Artist;
 use App\Models\Track;
 use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
@@ -30,9 +31,20 @@ class TrackSaveAction
     {
         $keyedTracks = $tracks->map(function ($track) {
             $album = $track['album'] ?? null;
+            $artist = $track['album']['artists'][0] ?? null;
+
+            if (!is_null($artist)) {
+                $foundArtist = Artist::firstOrCreate([
+                    'name' => $artist['name'],
+                ], [
+                    'spotify_id'  => $artist['id'],
+                    'api_url'     => $artist['href'],
+                    'spotify_uri' => $artist['uri'],
+                ]);
+            }
 
             if (!is_null($album)) {
-                $foundAlbum = Album::updateOrCreate([
+                $foundAlbum = Album::firstOrCreate([
                     'name' => $album['name'],
                 ], [
                     'spotify_id'  => $album['id'],
@@ -42,17 +54,19 @@ class TrackSaveAction
             }
 
             $newTrack = Track::updateOrCreate([
-                'spotify_id' => $track['id'],
-            ], [
-                'api_url'     => $track['href'],
-                'spotify_uri' => $track['uri'],
-                'name'        => Str::of($track['name'])->limit(191),
-            ]);
+                    'spotify_id' => $track['id'],
+                ], [
+                    'api_url'     => $track['href'],
+                    'spotify_uri' => $track['uri'],
+                    'name'        => Str::of($track['name'])->limit(191),
+                ]);
 
-            if (!is_null($album)) {
+            if (!is_null($album) && !is_null($artist)) {
+                $foundArtist->albums()->save($foundAlbum);
                 $foundAlbum->tracks()->save($newTrack);
             }
-            dump($newTrack->id);
+
+            dump($newTrack->name, $foundArtist->name, $foundAlbum->name);
 
             return $newTrack;
         });
