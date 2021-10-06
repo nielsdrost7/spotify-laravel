@@ -88,7 +88,7 @@ user-modify-playback-state user-read-playback-position user-read-recently-played
                 'Authorization' => 'Basic ' . base64_encode($clientId . ':' . $clientSecret),
             ])->post(self::SPOTIFY_API_TOKEN_URL, [
                 'grant_type'    => 'refresh_token',
-                'refresh_token' => 'AQCZ0sZ8S5FNac80VU4yDcLepdUyZmHQNKs6b4o4IZHuMlvMuHmH4mNs-s8fYuIEttE7hgEv8b3vY0jek9VFeO-2SxzrQptFkZpBkGz-xUqRUPSnX58248YjeIqD4qDXtBc',
+                'refresh_token' => $refreshToken,
                 'redirect_uri'  => route('spotify.callback'),
             ]);
         } catch (RequestException $e) {

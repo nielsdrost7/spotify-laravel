@@ -82,7 +82,7 @@ class TracksAPIController extends AppBaseController
     {
         $trackIds = array_values($request->ids);
         $trackUris = array_values($request->spotifyUris);
-        $playlistIds = ['2PG4sqjxUor5k1PtITTc0f', '2SbVATMTXA76bVYq7Ks06Z', '7DS263hH2FI4LzEh4m3DES', '5W2G6VALfr94wc13VRnUNi'];
+        $playlistIds = ['2PG4sqjxUor5k1PtITTc0f', '2SbVATMTXA76bVYq7Ks06Z', '7DS263hH2FI4LzEh4m3DES', '5W2G6VALfr94wc13VRnUNi', '0mWbAiiT8XInEC9EApLjwV'];
 
         $deletedTracks = Track::whereIn('id', $trackIds)->forceDelete();
 

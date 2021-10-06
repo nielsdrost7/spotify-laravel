@@ -73,16 +73,17 @@ class ArtistsAPIController extends AppBaseController
     {
         $artistIds = array_values($request->ids);
         $albumIds = Album::select('id')->whereIn('artist_id', $artistIds)->get();
-        $dbTrackUris = Track::select('spotify_uri')->whereIn('album_id', $albumIds)->get();
-        $playlistIds = ['2PG4sqjxUor5k1PtITTc0f', '2SbVATMTXA76bVYq7Ks06Z', '7DS263hH2FI4LzEh4m3DES', '5W2G6VALfr94wc13VRnUNi'];
-        $trackUris = $dbTrackUris->pluck('spotify_uri')->toArray();
 
-        $deletedArtists = Artist::whereIn('id', $artistIds)->forceDelete();
-        dump('deletedArtists', $deletedArtists);
+        $dbTrackUris = Track::select('spotify_uri')->whereIn('album_id', $albumIds)->get();
+
+        $playlistIds = ['2PG4sqjxUor5k1PtITTc0f', '2SbVATMTXA76bVYq7Ks06Z', '7DS263hH2FI4LzEh4m3DES', '5W2G6VALfr94wc13VRnUNi', '0mWbAiiT8XInEC9EApLjwV'];
+        $trackUris = $dbTrackUris->pluck('spotify_uri')->toArray();
 
         foreach ($playlistIds as $playlistId) {
             $returnResponse = $this->spotifyPlaylistsTracksService->deletePlaylistTracks($playlistId, $trackUris);
         }
+
+        $deletedArtists = Artist::whereIn('id', $artistIds)->forceDelete();
 
         return true;
     }

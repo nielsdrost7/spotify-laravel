@@ -68,7 +68,7 @@
               _method: 'POST'
             }
           })
-          .done(function () { location.reload( null, false ) })
+          //.done(function () { location.reload( null, false ) })
 
         }
       }

@@ -64,7 +64,7 @@
               spotifyIds: spotifyIds,
               _method: 'POST'
             }})
-            .done(function () { location.reload() })
+            //.done(function () { location.reload() })
 
         }
       }

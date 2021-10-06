@@ -45,7 +45,7 @@ class SpotifyService
      */
     protected function handleResponseError($responseBody): void
     {
-        dd('responseBody', $responseBody);
+        dd('handleResponseError', $responseBody);
         $error = (object) $responseBody['error'];    // Object!
 
         if (isset($error->message) && isset($error->status)) {
@@ -215,6 +215,8 @@ class SpotifyService
         return $responseBody;
     }
 
+    //https://open.spotify.com/track/5dxUSBv0HAikDdLwtNajWD?si=12402bcab368445e
+
     /**
      * Make a request to Spotify.
      *
@@ -235,7 +237,9 @@ class SpotifyService
     {
         $this->lastResponse = [];
 
-        $this->accessToken = $this->spotifyAuthService->getAccessToken();
+        $t = 'BQBbLGOum6W6HOtkhpgg2ksN65by6ckbGSyoKsppY7pdtDc3kMvQKHhFDm_k2DDZjVZfTnOZOvWVGk5jza8cIyoAqCJXOUZpt0WRVKcxUHyJchjTcCpTyiFyIT68zr7f4Cr2g9q5T8JrXul0zzgoI4q3CUt_-HmX6LRs_bZLBpPG7VgVQ-BgOC2kdtRqPlxdbnrJY6h3hYUIBalo19t8AAhla74aBK3BJ3A1lrFIjGI';
+        Cache::forget('spotifyAccessToken');
+        Cache::put('spotifyAccessToken', $t);
 
         try {
             $response = Http::withHeaders([
@@ -244,7 +248,7 @@ class SpotifyService
             ])
             ->acceptJson()
             ->withToken(
-                $this->accessToken
+                $t
             )
             ->delete(self::API_URL . $endpoint, [
                 'uris' => $trackUris,
@@ -252,6 +256,7 @@ class SpotifyService
         } catch (Exception $e) {
             dd('Exception deleting uris', $e);
         }
+        dump($endpoint, $trackUris);
 
         if ($response->failed()) {
             dd('failed', $response->getReasonPhrase(), $trackUris);

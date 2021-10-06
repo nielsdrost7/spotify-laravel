@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Artist;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +15,7 @@ class CreateAlbumsTable extends Migration
             $table->string('api_url', 191)->index();
             $table->string('spotify_uri', 191)->index();
 
-            $table->foreignIdFor(Artist::class);
+            $table->unsignedInteger('artist_id');
 
             $table->string('name', 191)->index();
 

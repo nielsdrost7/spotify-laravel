@@ -40,15 +40,16 @@ class SpotifyAuthController extends Controller
             'scope'         => implode(' ', $scopes),
             'redirect_uri'  => route('spotify.callback'),
         ]);
+        dd($url);
 
         return redirect()->away($url);
     }
 
     public function storeTokens(Request $request)
     {
-        if ($request->error == 'access_denied') {
+        /* if ($request->error == 'access_denied') {
             abort('403', 'access_denied');
-        }
+        } */
 
         $authCode = $request->code;
 

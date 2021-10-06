@@ -25,7 +25,6 @@ class AlbumSaveAction
     {
         $keyedAlbums = $albums->each(function ($album) {
             $artist = $album['artists'][0] ?? null;
-            dump('ArtistDump', $artist);
 
             if (!is_null($artist)) {
                 $foundArtist = Artist::updateOrCreate([
@@ -35,8 +34,8 @@ class AlbumSaveAction
                     'api_url'     => $artist['href'],
                     'spotify_uri' => $artist['uri'],
                 ]);
+                dump('ArtistDump', $foundArtist->name);
             }
-            dd('FoundArtist', $foundArtist);
 
             $newAlbum = Album::updateOrCreate([
                 'spotify_id' => $album['id'],
@@ -45,13 +44,11 @@ class AlbumSaveAction
                 'spotify_uri' => $album['uri'],
                 'name'        => Str::of($album['name'])->limit(191),
             ]);
+            dump('AlbumDump', $newAlbum->name);
 
             if (!is_null($artist)) {
-                $newAlbum->artist()->save($foundArtist);
+                $foundArtist->albums()->save($newAlbum);
             }
-
-            dd($foundArtist);
-            dd($newAlbum->id, $newAlbum->artist_id, $newAlbum->name);
 
             return $newAlbum;
         });
