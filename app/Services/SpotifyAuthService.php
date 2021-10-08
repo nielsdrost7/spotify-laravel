@@ -56,6 +56,7 @@ user-modify-playback-state user-read-playback-position user-read-recently-played
 
         $body = json_decode((string) $response->getBody());
         Cache::forget('spotifyRefreshToken');
+        Cache::forget('spotifyAccessToken');
         Cache::put('spotifyRefreshToken', $body->refresh_token);
         Cache::remember('spotifyAccessToken', $body->expires_in, function () use ($body) {
             return $body->access_token;

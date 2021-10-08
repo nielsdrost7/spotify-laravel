@@ -215,8 +215,6 @@ class SpotifyService
         return $responseBody;
     }
 
-    //https://open.spotify.com/track/5dxUSBv0HAikDdLwtNajWD?si=12402bcab368445e
-
     /**
      * Make a request to Spotify.
      *
@@ -236,10 +234,7 @@ class SpotifyService
     public function sendDeleteRequest($endpoint, $trackUris = [], $headers = []): array
     {
         $this->lastResponse = [];
-
-        $t = 'BQBbLGOum6W6HOtkhpgg2ksN65by6ckbGSyoKsppY7pdtDc3kMvQKHhFDm_k2DDZjVZfTnOZOvWVGk5jza8cIyoAqCJXOUZpt0WRVKcxUHyJchjTcCpTyiFyIT68zr7f4Cr2g9q5T8JrXul0zzgoI4q3CUt_-HmX6LRs_bZLBpPG7VgVQ-BgOC2kdtRqPlxdbnrJY6h3hYUIBalo19t8AAhla74aBK3BJ3A1lrFIjGI';
-        Cache::forget('spotifyAccessToken');
-        Cache::put('spotifyAccessToken', $t);
+        $t = Cache::get('spotifyAccessToken');
 
         try {
             $response = Http::withHeaders([

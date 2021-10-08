@@ -40,7 +40,6 @@ class SpotifyAuthController extends Controller
             'scope'         => implode(' ', $scopes),
             'redirect_uri'  => route('spotify.callback'),
         ]);
-        dd($url);
 
         return redirect()->away($url);
     }
