@@ -16,10 +16,17 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2.5|^8.0",
+        "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
+        "kirschbaum-development/eloquent-power-joins": "^2.4",
+        "laracasts/flash": "^3.2",
         "laravel/framework": "^8.54",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.2",
+        "predis/predis": "~1.0",
+        "spatie/laravel-queueable-action": "^2.12",
+        "yajra/laravel-datatables-oracle": "^9.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -40,6 +47,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
+        "files": [
+            "app/helpers.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

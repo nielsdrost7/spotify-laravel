@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'redis'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,32 +36,47 @@ return [
             'driver'      => 'database',
             'table'       => 'jobs',
             'queue'       => 'default',
-            'retry_after' => 90,
-        ],
-
-        'beanstalkd' => [
-            'driver'      => 'beanstalkd',
-            'host'        => 'localhost',
-            'queue'       => 'default',
-            'retry_after' => 90,
-            'block_for'   => 0,
-        ],
-
-        'sqs' => [
-            'driver' => 'sqs',
-            'key'    => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-            'queue'  => env('SQS_QUEUE', 'your-queue-name'),
-            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+            'retry_after' => 10,
+            'timeout'     => 180,
         ],
 
         'redis' => [
             'driver'      => 'redis',
             'connection'  => 'default',
             'queue'       => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
+            'retry_after' => 10,
             'block_for'   => null,
+            'timeout'     => 180,
+        ],
+
+        'low' => [
+            'driver'      => 'redis',
+            'table'       => 'jobs',
+            'queue'       => 'low',
+            'retry_after' => 10,
+        ],
+
+        'normal' => [
+            'driver'      => 'redis',
+            'table'       => 'jobs',
+            'queue'       => 'normal',
+            'retry_after' => 10,
+        ],
+
+        'high' => [
+            'driver'      => 'redis',
+            'table'       => 'jobs',
+            'queue'       => 'high',
+            'retry_after' => 10,
+        ],
+
+        'myfavoritequeue' => [
+            'driver'      => 'redis',
+            'connection'  => 'default',
+            'queue'       => 'my-favorite-queue',
+            'retry_after' => 10,
+            'block_for'   => null,
+            'timeout'     => 180,
         ],
     ],
 
